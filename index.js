@@ -6,7 +6,7 @@ const sortTodo = document.querySelector('.content__sort');
 const wrapperListTodo = document.querySelector('.content__list');
 let count;
 if(localStorage.getItem('todos')){
-count = JSON.parse(localStorage.getItem('todos')).length
+	count = JSON.parse(localStorage.getItem('todos')).length
 }else{
 	count = 0
 }
@@ -105,23 +105,18 @@ function checkedSortTodo(e) {
 	let sort = wrapperListTodo.children;
 	let dir = e.target.value;
 
-	if (dir === 'asc') {
-		Array.from(sort)
+    Array.from(sort)
 			.sort((a, b) => {
-				return a.children[0].textContent - b.children[0].textContent;
+				if(dir === 'asc'){
+					return a.children[0].textContent - b.children[0].textContent;
+				}else if(dir === 'desc'){
+					return b.children[0].textContent - a.children[0].textContent;
+				}
+				
 			})
 			.forEach((item) => {
 				wrapperListTodo.appendChild(item);
 			});
-	} else if (dir === 'desc') {
-		Array.from(sort)
-			.sort((a, b) => {
-				return b.children[0].textContent - a.children[0].textContent;
-			})
-			.forEach((item) => {
-				wrapperListTodo.appendChild(item);
-			});
-	}
 }
 function saveLocal(el, num) {
 	let todos;
